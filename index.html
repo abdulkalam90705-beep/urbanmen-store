@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Men's Fashion Kalam</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f6f2;
+  color: #20251f;
+}
+header {
+  background: #17251d;
+  color: white;
+  padding: 20px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.logo { font-size: 25px; font-weight: bold; }
+.logo span { color: #d8bd84; }
+header a { color: white; text-decoration: none; }
+.hero {
+  padding: 65px 7%;
+  background: #e7e6dc;
+}
+.hero h1 { font-size: clamp(36px, 6vw, 60px); margin: 0 0 15px; }
+.hero p { color: #555d53; line-height: 1.7; }
+button, input, select { font: inherit; }
+button {
+  background: #17251d;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 11px 16px;
+  cursor: pointer;
+}
+button:hover { background: #36533e; }
+main { padding: 35px 7%; }
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+input, select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+}
+#search { flex: 1; min-width: 180px; }
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e3e2dc;
+}
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #e7e6dc;
+}
+.details { padding: 16px; }
+.details h3 { margin: 0 0 8px; }
+.price { font-weight: bold; margin: 12px 0; }
+.cart {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 35px;
+}
+footer {
+  text-align: center;
+  padding: 25px;
+  background: #17251d;
+  color: white;
+}
+footer span { color: #d8bd84; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">URBAN <span>MEN</span></div>
+  <a href="#cart">🛒 Cart (<span id="count">0</span>)</a>
+</header>
+
+<section class="hero">
+  <h1>Style that speaks.</h1>
+  <p>Discover everyday essentials and fresh styles for men.</p>
+  <a href="#shop"><button>Explore Collection</button></a>
+</section>
+
+<main id="shop">
+  <h2>Shop Men's Collection</h2>
+
+  <div class="tools">
+    <input id="search" placeholder="Search clothes..." aria-label="Search products">
+    <select id="category" aria-label="Filter by category">
+      <option value="All">All Categories</option>
+      <option value="T-Shirts">T-Shirts</option>
+      <option value="Shirts">Shirts</option>
+      <option value="Jeans">Jeans</option>
+    </select>
+  </div>
+
+  <div class="products" id="products"></div>
+
+  <section class="cart" id="cart">
+    <h2>Your Shopping Cart</h2>
+    <div id="cartItems">Your cart is empty.</div>
+    <p id="total">Total: ₹0</p>
+    <p>Demo only: checkout and payment are not connected yet.</p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 Urban Men | Created by <span>Abdul Kalam</span></p>
+</footer>
+
+<script>
+const items = [
+  {
+    id: 1,
+    name: "Classic T-Shirt",
+    category: "T-Shirts",
+    price: 499,
+    
+image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80"
+
+  },
+  {
+    id: 2,
+    name: "Casual Shirt",
+    category: "Shirts",
+    price: 899,
+    
+image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80"
+
+  },
+  {
+    id: 3,
+    name: "Denim Jeans",
+    category: "Jeans",
+    price: 1199,
+   
+image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80"
+
+  },
+  {
+    id: 4,
+    name: "Premium Shirt",
+    category: "Shirts",
+    price: 999,
+   
+image: "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=600&q=80"
+
+  },
+  
+  {
+    id: 5,
+    name: "Casual Hoodie",
+    category: "Hoodies",
+    price: 1299,
+    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 6,
+    name: "Bomber Jacket",
+    category: "Jackets",
+    price: 1799,
+    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 7,
+    name: "Formal Trousers",
+    category: "Trousers",
+    price: 999,
+    image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 8,
+    name: "Classic Sneakers",
+    category: "Shoes",
+    price: 1499,
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+  }
+
+];
+
+let cart = [];
+
+function showProducts() {
+  const query = document.getElementById("search").value.toLowerCase();
+  const category = document.getElementById("category").value;
+
+  const filtered = items.filter(item =>
+    item.name.toLowerCase().includes(query) &&
+    (category === "All" || item.category === category)
+  );
+
+  document.getElementById("products").innerHTML = filtered.length
+    ? filtered.map(item => `
+      <article class="card">
+        <img src="${item.image}" alt="${item.name}">
+        <div class="details">
+          <h3>${item.name}</h3>
+          <p>${item.category}</p>
+          <p class="price">₹${item.price}</p>
+          <button onclick="addToCart(${item.id})">Add to Cart</button>
+        </div>
+      </article>
+    `).join("")
+    : "<p>No matching products found.</p>";
+}
+
+function addToCart(id) {
+  const product = items.find(item => item.id === id);
+  cart.push(product);
+  showCart();
+}
+
+function showCart() {
+  document.getElementById("count").textContent = cart.length;
+
+  document.getElementById("cartItems").innerHTML = cart.length
+    ? cart.map((item, index) =>
+        `<p>${item.name} — ₹${item.price}
+        <button onclick="removeItem(${index})">Remove</button></p>`
+      ).join("")
+    : "Your cart is empty.";
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  document.getElementById("total").textContent = "Total: ₹" + total;
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  showCart();
+}
+
+document.getElementById("search").addEventListener("input", showProducts);
+document.getElementById("category").addEventListener("change", showProducts);
+
+showProducts();
+</script>
+</body>
+</html>
